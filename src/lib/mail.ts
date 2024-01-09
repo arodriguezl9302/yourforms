@@ -24,3 +24,19 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     // else console.log(info);
   });
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const confirmLink = `http://localhost:3000/auth/new-password?token=${token}`;
+
+  const mailData = {
+    from: "YourForms <arodriguezl9302@proton.me>",
+    to: email,
+    subject: `Cambio de contraseña`,
+    html: `<p>Hola, click <a href="${confirmLink}">aca</a> cambiar tu contraseña</p>`,
+  };
+
+  transporter.sendMail(mailData, function (err, info) {
+    if (err) console.log(err);
+    // else console.log(info);
+  });
+};

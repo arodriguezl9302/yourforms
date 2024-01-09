@@ -5,7 +5,7 @@ import CardWrapper from "../shared/card-wrapper";
 import { BeatLoader } from "react-spinners";
 import { useEffectOnce } from "use-effect-once";
 import { useSearchParams } from "next/navigation";
-import { newVerification } from "@/data/new-verification";
+import { newVerification } from "@/actions/new-verification";
 import FormError from "../shared/form-error";
 import FormSuccess from "../shared/form-success";
 
