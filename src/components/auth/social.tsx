@@ -1,17 +1,35 @@
 "use client";
 
 import React from "react";
-import { BiLogoGoogle, BiLogoFacebook } from "react-icons/bi";
+import { signIn } from "next-auth/react";
+import { BiLogoGoogle, BiLogoGithub } from "react-icons/bi";
 import { Button } from "../ui/button";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const Social = () => {
+  const onClick = (provider: "google" | "github") => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+    });
+  };
+
   return (
     <div className="flex items-center w-full gap-x-2">
-      <Button className="w-full" size="lg" variant="outline" onClick={() => {}}>
+      <Button
+        className="w-full"
+        size="lg"
+        variant="outline"
+        onClick={() => onClick("google")}
+      >
         <BiLogoGoogle className="h-5 w-5" />
       </Button>
-      <Button className="w-full" size="lg" variant="outline" onClick={() => {}}>
-        <BiLogoFacebook className="h-5 w-5" />
+      <Button
+        className="w-full"
+        size="lg"
+        variant="outline"
+        onClick={() => onClick("github")}
+      >
+        <BiLogoGithub className="h-5 w-5" />
       </Button>
     </div>
   );
