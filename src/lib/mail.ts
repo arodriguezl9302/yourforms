@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `https://www.yourforms.online/auth/new-verification?token=${token}`;
 
   const mailData = {
     from: "YourForms <arodriguezl9302@proton.me>",
@@ -26,7 +26,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const confirmLink = `http://localhost:3000/auth/new-password?token=${token}`;
+  const confirmLink = `https://www.yourforms.online/auth/new-password?token=${token}`;
 
   const mailData = {
     from: "YourForms <arodriguezl9302@proton.me>",
