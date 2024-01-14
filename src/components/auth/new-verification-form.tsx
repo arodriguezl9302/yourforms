@@ -36,7 +36,7 @@ const NewVerificationForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Cuenta verificada"
+      headerLabel="Verificación de cuenta"
       backButtonLabel="Entrar"
       backButtonHref="/auth/login"
       showScocial={false}

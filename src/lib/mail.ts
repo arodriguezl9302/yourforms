@@ -9,8 +9,22 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+export const sendTwoFactorSendEmail = async (email: string, token: string) => {
+  const mailData = {
+    from: "YourForms <arodriguezl9302@proton.me>",
+    to: email,
+    subject: `Código 2Factor`,
+    html: `<p>Hola, este es el código, <h2>${token}</h2> para entrar a tu cuenta</p>`,
+  };
+
+  transporter.sendMail(mailData, function (err, info) {
+    if (err) console.log(err);
+    // else console.log(info);
+  });
+};
+
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `https://www.yourforms.online/auth/new-verification?token=${token}`;
+  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
 
   const mailData = {
     from: "YourForms <arodriguezl9302@proton.me>",
@@ -26,7 +40,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const confirmLink = `https://www.yourforms.online/auth/new-password?token=${token}`;
+  const confirmLink = `http://localhost:3000/auth/new-password?token=${token}`;
 
   const mailData = {
     from: "YourForms <arodriguezl9302@proton.me>",
