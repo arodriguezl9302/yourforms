@@ -1,15 +1,18 @@
 "use server";
 
 import * as z from "zod";
-import { useServerCurrentUser } from "@/lib/auth";
+// import { useServerCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { FormSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
 class UserNotFoundError extends Error {}
 
 export const getFormsStats = async () => {
-  const user = await useServerCurrentUser();
+  // const user = await useServerCurrentUser();
+  const session = await auth();
+  const user = session?.user;
 
   if (!user) throw new UserNotFoundError();
 
@@ -43,7 +46,9 @@ export const getFormsStats = async () => {
 };
 
 export const createForm = async (values: z.infer<typeof FormSchema>) => {
-  const user = await useServerCurrentUser();
+  // const user = await useServerCurrentUser();
+  const session = await auth();
+  const user = session?.user;
 
   if (!user) throw new UserNotFoundError();
 
@@ -60,6 +65,7 @@ export const createForm = async (values: z.infer<typeof FormSchema>) => {
       userId: user.id,
       name,
       description,
+      content: "[]",
     },
   });
 
@@ -74,7 +80,9 @@ export const createForm = async (values: z.infer<typeof FormSchema>) => {
 };
 
 export const getForms = async () => {
-  const user = await useServerCurrentUser();
+  // const user = await useServerCurrentUser();
+  const session = await auth();
+  const user = session?.user;
 
   if (!user) throw new UserNotFoundError();
 
@@ -91,7 +99,9 @@ export const getForms = async () => {
 };
 
 export const getFormById = async (id: string) => {
-  const user = await useServerCurrentUser();
+  // const user = await useServerCurrentUser();
+  const session = await auth();
+  const user = session?.user;
 
   if (!user) throw new UserNotFoundError();
 
@@ -103,4 +113,42 @@ export const getFormById = async (id: string) => {
   });
 
   return form;
+};
+
+export const updateFormContent = async (id: string, jsonValue: string) => {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) throw new UserNotFoundError();
+
+  revalidatePath("/builder");
+
+  return await db.form.update({
+    where: {
+      userId: user.id,
+      id: id,
+    },
+    data: {
+      content: jsonValue,
+    },
+  });
+};
+
+export const publishForm = async (id: string) => {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) throw new UserNotFoundError();
+
+  revalidatePath("/builder");
+
+  return await db.form.update({
+    where: {
+      userId: user.id,
+      id,
+    },
+    data: {
+      published: true,
+    },
+  });
 };

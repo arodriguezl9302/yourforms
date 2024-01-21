@@ -17,6 +17,9 @@ dependencies:
   '@prisma/client':
     specifier: ^5.7.1
     version: registry.npmjs.org/@prisma/client@5.7.1(prisma@5.7.1)
+  '@radix-ui/react-alert-dialog':
+    specifier: ^1.0.5
+    version: registry.npmjs.org/@radix-ui/react-alert-dialog@1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
   '@radix-ui/react-avatar':
     specifier: ^1.0.4
     version: registry.npmjs.org/@radix-ui/react-avatar@1.0.4(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -77,6 +80,9 @@ dependencies:
   react:
     specifier: ^18
     version: registry.npmjs.org/react@18.2.0
+  react-confetti:
+    specifier: ^6.1.0
+    version: registry.npmjs.org/react-confetti@6.1.0(react@18.2.0)
   react-dom:
     specifier: ^18
     version: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
@@ -651,6 +657,35 @@ packages:
     version: 1.0.1
     dependencies:
       '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.7
+    dev: false
+
+  registry.npmjs.org/@radix-ui/react-alert-dialog@1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OrVIOcZL0tl6xibeuGt5/+UxoT2N27KCFOPjFyfXMnchxSHZ/OW7cCX2nGlIYJrbHK/fczPcFzAwvNBB6XBNMA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@radix-ui/react-alert-dialog/-/react-alert-dialog-1.0.5.tgz}
+    id: registry.npmjs.org/@radix-ui/react-alert-dialog/1.0.5
+    name: '@radix-ui/react-alert-dialog'
+    version: 1.0.5
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.7
+      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive@1.0.1
+      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.46)(react@18.2.0)
+      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context@1.0.1(@types/react@18.2.46)(react@18.2.0)
+      '@radix-ui/react-dialog': registry.npmjs.org/@radix-ui/react-dialog@1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot': registry.npmjs.org/@radix-ui/react-slot@1.0.2(@types/react@18.2.46)(react@18.2.0)
+      '@types/react': registry.npmjs.org/@types/react@18.2.46
+      '@types/react-dom': registry.npmjs.org/@types/react-dom@18.2.18
+      react: registry.npmjs.org/react@18.2.0
+      react-dom: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
     dev: false
 
   registry.npmjs.org/@radix-ui/react-arrow@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
@@ -4231,6 +4266,19 @@ packages:
     name: queue-microtask
     version: 1.2.3
 
+  registry.npmjs.org/react-confetti@6.1.0(react@18.2.0):
+    resolution: {integrity: sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-confetti/-/react-confetti-6.1.0.tgz}
+    id: registry.npmjs.org/react-confetti/6.1.0
+    name: react-confetti
+    version: 6.1.0
+    engines: {node: '>=10.18'}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      react: registry.npmjs.org/react@18.2.0
+      tween-functions: registry.npmjs.org/tween-functions@1.2.0
+    dev: false
+
   registry.npmjs.org/react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz}
     id: registry.npmjs.org/react-dom/18.2.0
@@ -4859,6 +4907,12 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz}
     name: tslib
     version: 2.6.2
+    dev: false
+
+  registry.npmjs.org/tween-functions@1.2.0:
+    resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tween-functions/-/tween-functions-1.2.0.tgz}
+    name: tween-functions
+    version: 1.2.0
     dev: false
 
   registry.npmjs.org/type-check@0.4.0:

@@ -14,8 +14,13 @@ import { idGenerator } from "@/lib/id-generator";
 import DesignerElementWrapper from "./design-element-wrapper";
 
 const Designer = () => {
-  const { elements, addElement, selectedElement, setSelectedElement } =
-    useDesaignerContext();
+  const {
+    elements,
+    addElement,
+    selectedElement,
+    setSelectedElement,
+    removeElement,
+  } = useDesaignerContext();
 
   const droppable = useDroppable({
     id: "designed-drop-area",
@@ -31,15 +36,89 @@ const Designer = () => {
 
       const isDesignedBtnElement = active.data?.current?.isDesignedBtnElement;
 
-      if (isDesignedBtnElement) {
+      const isDroppingOverDesignerDropArea =
+        over?.data?.current?.isDesignedDropData;
+
+      const isDroppingSidebarBtnOverDesignerDropArea =
+        isDesignedBtnElement && isDroppingOverDesignerDropArea;
+
+      if (isDroppingSidebarBtnOverDesignerDropArea) {
         const type = active.data?.current?.type;
         const newElement = FormElements[type as ElementsType].construct(
           idGenerator()
         );
 
-        addElement(0, newElement);
+        addElement(elements.length, newElement);
+        return;
       }
       // console.log("first ", event);
+      const isDroppingOverDesignerElementTopHalf =
+        over?.data?.current?.isTopHalfDesignerElement;
+      const isDroppingOverDesignerElementBottomHalf =
+        over?.data?.current?.isBottomHalfDesignerElement;
+
+      const isDroppingOverDesignerElement =
+        isDroppingOverDesignerElementTopHalf ||
+        isDroppingOverDesignerElementBottomHalf;
+
+      const isDroppingSidebarBtnOverDesignerElement =
+        isDesignedBtnElement && isDroppingOverDesignerElement;
+
+      if (isDroppingSidebarBtnOverDesignerElement) {
+        const type = active.data?.current?.type;
+        const newElement = FormElements[type as ElementsType].construct(
+          idGenerator()
+        );
+
+        const overId = over?.data?.current?.elementId;
+
+        console.log("overid: ", overId);
+
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+        if (overElementIndex === -1) {
+          throw new Error("elemento no encontrado");
+        }
+
+        let indexForNewElement = overElementIndex;
+
+        if (isDroppingOverDesignerElementBottomHalf) {
+          indexForNewElement = overElementIndex + 1;
+        }
+
+        addElement(indexForNewElement, newElement);
+        return;
+      }
+
+      const isDraggingDesignerElement =
+        active?.data?.current?.isDesignerElement;
+
+      const draggingDesignerElementOVerAnotherDesignerElement =
+        isDroppingOverDesignerElement && isDraggingDesignerElement;
+
+      if (draggingDesignerElementOVerAnotherDesignerElement) {
+        const activeId = active?.data?.current?.elementId;
+        const overId = over?.data?.current?.elementId;
+
+        const activeElementIndex = elements.findIndex(
+          (el) => el.id === activeId
+        );
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+
+        if (activeElementIndex === -1 || overElementIndex === -1) {
+          throw new Error("elemento no encontrado");
+        }
+
+        const activeElement = { ...elements[activeElementIndex] };
+        removeElement(activeId);
+
+        let indexForNewElement = overElementIndex;
+
+        if (isDroppingOverDesignerElementBottomHalf) {
+          indexForNewElement = overElementIndex + 1;
+        }
+
+        addElement(indexForNewElement, activeElement);
+      }
     },
   });
 
@@ -55,7 +134,7 @@ const Designer = () => {
           ref={droppable.setNodeRef}
           className={cn(
             "bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center flex-1 overflow-y-auto",
-            droppable.isOver && "ring-2 ring-primary/20 justify-start"
+            droppable.isOver && "ring-2 ring-primary ring-inset justify-start"
           )}
         >
           {!droppable.isOver && elements.length === 0 && (

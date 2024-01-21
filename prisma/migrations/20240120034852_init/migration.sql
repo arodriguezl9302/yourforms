@@ -81,7 +81,7 @@ CREATE TABLE `forms` (
     `published` BOOLEAN NOT NULL DEFAULT false,
     `name` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NOT NULL DEFAULT '',
-    `content` VARCHAR(191) NOT NULL DEFAULT '[]',
+    `content` LONGTEXT NOT NULL,
     `visits` INTEGER NOT NULL DEFAULT 0,
     `submissions` INTEGER NOT NULL DEFAULT 0,
     `sharedUrl` VARCHAR(191) NOT NULL,
