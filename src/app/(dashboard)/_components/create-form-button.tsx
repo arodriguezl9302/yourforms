@@ -46,6 +46,7 @@ const CreateFormButton = () => {
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(() => {
       createForm(values).then((data) => {
+        console.log("error: ", data);
         if (data?.error) {
           toast({
             title: "Error",
@@ -53,8 +54,6 @@ const CreateFormButton = () => {
             variant: "destructive",
           });
         }
-
-        console.log(data?.id);
         form.reset();
         setOpen(false);
       });

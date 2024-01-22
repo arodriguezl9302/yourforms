@@ -60,23 +60,23 @@ export const createForm = async (values: z.infer<typeof FormSchema>) => {
 
   const { name, description } = validatedFields.data;
 
-  const form = await db.form.create({
-    data: {
-      userId: user.id,
-      name,
-      description,
-      content: "[]",
-    },
-  });
+  try {
+    const form = await db.form.create({
+      data: {
+        userId: user.id,
+        name,
+        description,
+        content: "[]",
+      },
+    });
 
-  if (!form) {
+    revalidatePath("/home");
+    return {
+      id: form.id,
+    };
+  } catch (error) {
     return { error: "No se pudo guardar el formulario!" };
   }
-
-  revalidatePath("/home");
-  return {
-    id: form.id,
-  };
 };
 
 export const getForms = async () => {
@@ -149,6 +149,22 @@ export const publishForm = async (id: string) => {
     },
     data: {
       published: true,
+    },
+  });
+};
+
+export const getFormContentFromUrl = async (formUrl: string) => {
+  return await db.form.update({
+    where: {
+      sharedUrl: formUrl,
+    },
+    data: {
+      visits: {
+        increment: 1,
+      },
+    },
+    select: {
+      content: true,
     },
   });
 };

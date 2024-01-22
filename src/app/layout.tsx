@@ -7,6 +7,7 @@ import { font } from "@/components/shared/custom-font";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/navbar/navbar";
 import { Toaster } from "@/components/ui/toaster";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "YourForms | Página Princiapl",
@@ -23,6 +24,7 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
         <body className={font.className}>
+          <NextTopLoader />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

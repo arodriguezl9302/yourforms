@@ -103,7 +103,7 @@ model Form {
   content         String            @db.LongText
   visits          Int               @default(0)
   submissions     Int               @default(0)
-  sharedUrl       String            @default(uuid())
+  sharedUrl       String            @unique @default(uuid())
   createdAt       DateTime          @default(now())
   formSubmissions FormSubmissions[]
 
