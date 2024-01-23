@@ -168,3 +168,22 @@ export const getFormContentFromUrl = async (formUrl: string) => {
     },
   });
 };
+
+export const formSubmission = async (formUrl: string, content: string) => {
+  return await db.form.update({
+    where: {
+      sharedUrl: formUrl,
+      published: true,
+    },
+    data: {
+      submissions: {
+        increment: 1,
+      },
+      formSubmissions: {
+        create: {
+          content,
+        },
+      },
+    },
+  });
+};
