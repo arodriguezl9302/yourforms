@@ -187,3 +187,20 @@ export const formSubmission = async (formUrl: string, content: string) => {
     },
   });
 };
+
+export const getFormWithSubmissions = async (id: string) => {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) throw new UserNotFoundError();
+
+  return await db.form.findUnique({
+    where: {
+      id,
+      userId: user.id,
+    },
+    include: {
+      formSubmissions: true,
+    },
+  });
+};
