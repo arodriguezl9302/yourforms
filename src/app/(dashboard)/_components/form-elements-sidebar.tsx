@@ -8,14 +8,18 @@ const FormsElementSidebar = () => {
     <div>
       <p className="text-sm text-foreground/70">Elementos</p>
       <Separator className="my-2" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-y-5 place-items-center">
         {" "}
         {/* place-items-center */}
-        <p className="text-sm text-muted-foreground place-self-start col-span-1 md:col-span-2 my-2">
+        <p className="text-sm text-muted-foreground place-self-start col-span-2 my-2">
           Elementos generales
         </p>
-        <SideBarBtnElement formElement={FormElements.TextField} />
         <SideBarBtnElement formElement={FormElements.TitleField} />
+        <SideBarBtnElement formElement={FormElements.SubTitleField} />
+        <p className="text-sm text-muted-foreground place-self-start col-span-2 my-2">
+          Elementos de formularios
+        </p>
+        <SideBarBtnElement formElement={FormElements.TextField} />
       </div>
     </div>
   );
