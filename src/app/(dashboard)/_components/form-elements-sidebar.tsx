@@ -17,6 +17,7 @@ const FormsElementSidebar = () => {
         <SideBarBtnElement formElement={FormElements.TitleField} />
         <SideBarBtnElement formElement={FormElements.SubTitleField} />
         <SideBarBtnElement formElement={FormElements.ParagraphField} />
+        <SideBarBtnElement formElement={FormElements.SeparatorField} />
         <p className="text-sm text-muted-foreground place-self-start col-span-2 my-2">
           Elementos de formularios
         </p>
