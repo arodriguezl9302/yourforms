@@ -26,22 +26,23 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { LuHeading2 } from "react-icons/lu";
+import { BsTextParagraph } from "react-icons/bs";
+import { Textarea } from "@/components/ui/textarea";
 
-const type: ElementsType = "SubTitleField";
+const type: ElementsType = "ParagraphField";
 
 const extraAttributes = {
-  title: "SubTítulo",
+  text: "Texto aquí",
 };
 
 const propertiesSchema = z.object({
-  title: z
+  text: z
     .string()
-    .min(2, { message: "El subtítulo debe contener al menos 2 caracteres" })
-    .max(50),
+    .min(2, { message: "El título debe contener al menos 2 caracteres" })
+    .max(500),
 });
 
-export const SubTitleFieldFormElement: FormElement = {
+export const ParagraphFieldFormElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -49,8 +50,8 @@ export const SubTitleFieldFormElement: FormElement = {
     extraAttributes,
   }),
   designerBtnElement: {
-    icon: LuHeading2,
-    label: "SubTítulo",
+    icon: BsTextParagraph,
+    label: "Parágrafo",
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
@@ -69,13 +70,13 @@ function PropertiesComponent({
 }) {
   const { updateElement } = useDesaignerContext();
   const element = elementInstance as CustomInstance;
-  const { title } = element.extraAttributes;
+  const { text } = element.extraAttributes;
 
   const form = useForm<z.infer<typeof propertiesSchema>>({
     resolver: zodResolver(propertiesSchema),
     mode: "onBlur",
     defaultValues: {
-      title: title,
+      text: text,
     },
   });
 
@@ -84,12 +85,12 @@ function PropertiesComponent({
   }, [form, element]);
 
   function applyChange(values: z.infer<typeof propertiesSchema>) {
-    const { title } = values;
+    const { text } = values;
 
     updateElement(element.id, {
       ...element,
       extraAttributes: {
-        title,
+        text,
       },
     });
   }
@@ -107,12 +108,13 @@ function PropertiesComponent({
           <FormField
             control={form.control}
             // disabled={isPending}
-            name="title"
+            name="text"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Label</FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
+                    rows={5}
                     {...field}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") e.currentTarget.blur();
@@ -143,12 +145,12 @@ function DesignerComponent({
   elementInstance: FormElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { title } = element.extraAttributes;
+  const { text } = element.extraAttributes;
 
   return (
     <div className="flex flex-col w-full gap-2">
-      <p className="text-muted-foreground">SubTítulo</p>
-      <p className="text-lg">{title}</p>
+      <p className="text-muted-foreground">Párrafo</p>
+      <p>{text}</p>
     </div>
   );
 }
@@ -162,7 +164,7 @@ function FormComponent({
 }) {
   const element = elementInstance as CustomInstance;
 
-  const { title } = element.extraAttributes;
+  const { text } = element.extraAttributes;
 
-  return <p className="text-lg">{title}</p>;
+  return <p>{text}</p>;
 }
