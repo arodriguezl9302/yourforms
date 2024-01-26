@@ -26,22 +26,23 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { LuHeading2 } from "react-icons/lu";
+import { LuHeading1, LuSeparatorHorizontal } from "react-icons/lu";
+import { Slider } from "@/components/ui/slider";
 
-const type: ElementsType = "SubTitleField";
+const type: ElementsType = "SpaceField";
 
 const extraAttributes = {
-  title: "SubTítulo",
+  height: 20, //"Título",
 };
 
 const propertiesSchema = z.object({
-  title: z
-    .string()
-    .min(2, { message: "El subtítulo debe contener al menos 2 caracteres" })
-    .max(50),
+  height: z
+    .number()
+    .min(5, { message: "El alto debe de ser de al menos 2px" })
+    .max(200),
 });
 
-export const SubTitleFieldFormElement: FormElement = {
+export const SpaceFieldFormElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -49,8 +50,8 @@ export const SubTitleFieldFormElement: FormElement = {
     extraAttributes,
   }),
   designerBtnElement: {
-    icon: LuHeading2,
-    label: "SubTítulo",
+    icon: LuSeparatorHorizontal,
+    label: "Espacio",
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
@@ -75,7 +76,7 @@ function PropertiesComponent({
     resolver: zodResolver(propertiesSchema),
     mode: "onBlur",
     defaultValues: {
-      title: title,
+      height: 20,
     },
   });
 
@@ -84,12 +85,12 @@ function PropertiesComponent({
   }, [form, element]);
 
   function applyChange(values: z.infer<typeof propertiesSchema>) {
-    const { title } = values;
+    const { height } = values;
 
     updateElement(element.id, {
       ...element,
       extraAttributes: {
-        title,
+        height,
       },
     });
   }
@@ -107,17 +108,25 @@ function PropertiesComponent({
           <FormField
             control={form.control}
             // disabled={isPending}
-            name="title"
+            name="height"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>SubTítulo</FormLabel>
+                <FormLabel>Alto {form.watch("height")}(px)</FormLabel>
                 <FormControl>
-                  <Input
+                  <Slider
+                    defaultValue={[field.value]}
+                    min={5}
+                    max={200}
+                    onValueChange={(value) => {
+                      field.onChange(value[0]);
+                    }}
+                  />
+                  {/* <Input
                     {...field}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") e.currentTarget.blur();
                     }}
-                  />
+                  /> */}
                 </FormControl>
                 <FormDescription>
                   La etiqueta que se va a mostrar en el campo de texto
@@ -143,12 +152,12 @@ function DesignerComponent({
   elementInstance: FormElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { title } = element.extraAttributes;
+  const { height } = element.extraAttributes;
 
   return (
-    <div className="flex flex-col w-full gap-2">
-      <p className="text-muted-foreground">SubTítulo</p>
-      <p className="text-lg">{title}</p>
+    <div className="flex flex-col w-full gap-2 items-center">
+      <p className="text-muted-foreground">Epsacio {height}px</p>
+      <LuSeparatorHorizontal className="w-8 h-8" />
     </div>
   );
 }
@@ -162,7 +171,7 @@ function FormComponent({
 }) {
   const element = elementInstance as CustomInstance;
 
-  const { title } = element.extraAttributes;
+  const { height } = element.extraAttributes;
 
-  return <p className="text-lg">{title}</p>;
+  return <div style={{ height, width: "100%" }}></div>;
 }

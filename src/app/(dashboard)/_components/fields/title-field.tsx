@@ -110,7 +110,7 @@ function PropertiesComponent({
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Label</FormLabel>
+                <FormLabel>Título</FormLabel>
                 <FormControl>
                   <Input
                     {...field}

@@ -111,7 +111,7 @@ function PropertiesComponent({
             name="text"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Label</FormLabel>
+                <FormLabel>Párrafo</FormLabel>
                 <FormControl>
                   <Textarea
                     rows={5}
