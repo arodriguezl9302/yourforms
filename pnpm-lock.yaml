@@ -107,6 +107,9 @@ dependencies:
   tailwind-merge:
     specifier: ^2.2.0
     version: registry.npmjs.org/tailwind-merge@2.2.0
+  tailwind-scrollbar:
+    specifier: ^3.0.5
+    version: registry.npmjs.org/tailwind-scrollbar@3.0.5(tailwindcss@3.4.0)
   tailwindcss-animate:
     specifier: ^1.0.7
     version: registry.npmjs.org/tailwindcss-animate@1.0.7(tailwindcss@3.4.0)
@@ -4870,6 +4873,18 @@ packages:
     version: 2.2.0
     dependencies:
       '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.7
+    dev: false
+
+  registry.npmjs.org/tailwind-scrollbar@3.0.5(tailwindcss@3.4.0):
+    resolution: {integrity: sha512-0ZwxTivevqq9BY9fRP9zDjHl7Tu+J5giBGbln+0O1R/7nHtBUKnjQcA1aTIhK7Oyjp6Uc/Dj6/dn8Dq58k5Uww==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tailwind-scrollbar/-/tailwind-scrollbar-3.0.5.tgz}
+    id: registry.npmjs.org/tailwind-scrollbar/3.0.5
+    name: tailwind-scrollbar
+    version: 3.0.5
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: registry.npmjs.org/tailwindcss@3.4.0
     dev: false
 
   registry.npmjs.org/tailwindcss-animate@1.0.7(tailwindcss@3.4.0):

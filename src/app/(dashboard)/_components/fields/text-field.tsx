@@ -1,6 +1,6 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
+import { LuTextCursorInput } from "react-icons/lu";
 import * as z from "zod";
 
 import {
@@ -58,7 +58,7 @@ export const TextFieldFormElement: FormElement = {
     extraAttributes,
   }),
   designerBtnElement: {
-    icon: MdTextFields,
+    icon: LuTextCursorInput,
     label: "Campo de texto",
   },
   designerComponent: DesignerComponent,
