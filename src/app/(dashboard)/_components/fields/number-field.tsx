@@ -1,6 +1,5 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
 import * as z from "zod";
 
 import {
@@ -26,14 +25,15 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { Bs123 } from "react-icons/bs";
 
-const type: ElementsType = "TextField";
+const type: ElementsType = "NumberField";
 
 const extraAttributes = {
-  label: "Campo de texto",
+  label: "Campo numérico",
   helperText: "Texto de ayuda",
   required: false,
-  placeHolder: "Placeholder",
+  placeHolder: "0",
 };
 
 const propertiesSchema = z.object({
@@ -50,7 +50,7 @@ const propertiesSchema = z.object({
   }),
 });
 
-export const TextFieldFormElement: FormElement = {
+export const NumberFieldFormElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -58,8 +58,8 @@ export const TextFieldFormElement: FormElement = {
     extraAttributes,
   }),
   designerBtnElement: {
-    icon: MdTextFields,
-    label: "Campo de texto",
+    icon: Bs123,
+    label: "Campo numérico",
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
@@ -244,7 +244,7 @@ function DesignerComponent({
         {label}
         {required && "*"}
       </Label>
-      <Input readOnly disabled placeholder={placeHolder} />
+      <Input readOnly disabled type="number" placeholder={placeHolder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
       )}
@@ -284,12 +284,16 @@ function FormComponent({
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
           if (!submitValue) return;
-          const valid = TextFieldFormElement.validate(element, e.target.value);
+          const valid = NumberFieldFormElement.validate(
+            element,
+            e.target.value
+          );
           setError(!valid);
           if (!valid) return;
           submitValue(element.id, e.target.value);
         }}
         value={value}
+        type="number"
       />
       {helperText && (
         <p

@@ -23,6 +23,7 @@ const FormsElementSidebar = () => {
           Elementos de formularios
         </p>
         <SideBarBtnElement formElement={FormElements.TextField} />
+        <SideBarBtnElement formElement={FormElements.NumberField} />
       </div>
     </div>
   );
